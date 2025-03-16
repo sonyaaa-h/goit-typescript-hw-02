@@ -8,25 +8,38 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
 
+interface Image {
+  id: string;
+  urls: {
+    small: string;
+    regular?: string;
+  };
+  alt_description: string;
+  user: {
+    name: string;
+  };
+  likes: number;
+}
+
 function App() {
-  const [photos, setPhotos] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  const [photos, setPhotos] = useState<Image[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalImage, setModalImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [modalImage, setModalImage] = useState<Image | null>(null);
 
-  const openModal = (image) => {
+  const openModal = (image: Image) => {
     setModalImage(image);
-    setIsModalOpen(true);    
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setModalImage({});
+    setModalImage(null);
   };
 
   // console.log(photos);
@@ -50,24 +63,34 @@ function App() {
     getPhotos();
   }, [query, page]);
 
-  const handleSearch = (newQuery) => {
+  const handleSearch = (newQuery: string) => {
     if (newQuery.trim() === "") return;
     setQuery(newQuery);
     setPage(1);
     setPhotos([]);
   };
-  
 
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
-      {photos.length > 0 && <ImageGallery photos={photos} onClick={openModal} setModalImage={setModalImage} />}
+      {photos.length > 0 && (
+        <ImageGallery
+          photos={photos}
+          onClick={openModal}
+        />
+      )}
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       {photos.length > 0 && page < totalPages && !isLoading && (
         <LoadMoreBtn onClick={() => setPage(page + 1)} />
       )}
-      {isModalOpen && modalImage && <ImageModal isOpen={isModalOpen} onClose={closeModal} modalImage={modalImage} />}
+      {isModalOpen && modalImage && (
+        <ImageModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          modalImage={modalImage}
+        />
+      )}
     </>
   );
 }

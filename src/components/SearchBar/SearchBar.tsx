@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import s from "./SearchBar.module.css";
 import { IoSearchCircleOutline } from "react-icons/io5";
 import toast, { Toaster } from "react-hot-toast";
 
-const SearchBar = ({ onSubmit }) => {
+interface SearchBarProps {
+    onSubmit: (query: string) => void;
+}
+
+const SearchBar : React.FC<SearchBarProps> = ({ onSubmit }) => {
     const [value, setValue] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (value.trim() === "") {
             return toast.error("Please enter a search query.");

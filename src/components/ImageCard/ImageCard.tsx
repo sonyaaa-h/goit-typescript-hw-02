@@ -1,7 +1,24 @@
 import { FaHeart, FaCameraRetro } from "react-icons/fa";
 import s from "./ImageCard.module.css";
 
-const ImageCard = ({ onClick, photo }) => {
+interface Image {
+    id: string;
+    urls: {
+        small: string;
+    };
+    alt_description: string;
+    user: {
+        name: string;
+    };
+    likes: number;
+}
+
+interface ImageCardProps {
+    photo: Image;
+    onClick: (photo: Image) => void;
+}
+
+const ImageCard: React.FC<ImageCardProps> = ({ onClick, photo }) => {
     return (
         <div className={s.galleryCard}>
             <div>
