@@ -1,0 +1,13 @@
+.galleryCard {
+    border: 1px solid #808080;
+}
+
+.imageInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    /* border: 1px solid #000000;
+    border-top: none; */
+    padding: 10px;
+} 
