@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import { Image } from "../../App";
 
 const customStyles = {
     overlay: {
@@ -15,19 +16,6 @@ const customStyles = {
 };
 
 Modal.setAppElement("#root");
-
-interface Image {
-    id: string;
-    urls: {
-        small: string;
-        regular?: string | undefined;
-    };
-    alt_description: string;
-    user: {
-        name: string;
-    };
-    likes: number;
-}
 
 interface ImageModalProps {
     modalImage: Image;

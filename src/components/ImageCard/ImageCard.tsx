@@ -1,17 +1,6 @@
 import { FaHeart, FaCameraRetro } from "react-icons/fa";
 import s from "./ImageCard.module.css";
-
-interface Image {
-    id: string;
-    urls: {
-        small: string;
-    };
-    alt_description: string;
-    user: {
-        name: string;
-    };
-    likes: number;
-}
+import { Image } from "../../App";
 
 interface ImageCardProps {
     photo: Image;

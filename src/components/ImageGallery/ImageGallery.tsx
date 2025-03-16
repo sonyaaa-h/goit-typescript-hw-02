@@ -1,17 +1,6 @@
+import { Image } from "../../App";
 import ImageCard from "../ImageCard/ImageCard";
 import s from "./ImageGallery.module.css";
-
-interface Image {
-    id: string;
-    urls: {
-        small: string;
-    };
-    alt_description: string;
-    user: {
-        name: string;
-    };
-    likes: number;
-}
 
 interface ImageGalleryProps {
     photos: Image[];
